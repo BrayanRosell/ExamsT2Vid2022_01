@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class packController : MonoBehaviour
 {
     private SpriteRenderer sr;
@@ -9,11 +11,13 @@ public class packController : MonoBehaviour
     private Rigidbody2D rb2d;
     private float speed = 8;
     public int p=0;
-    public int m=0;
+   public Text scoreText;
 
+    private int vidas = 3;
+    private int enemigos = 5;
     public GameObject rightBullet;
     public GameObject rightBulletMedi;
-    public GameObject rightBulletGrande;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,27 +30,23 @@ public class packController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+         scoreText.text = "vidas: "+vidas +"     " +"enemigos: " +enemigos;
+         if(vidas >0){
+
+         
          rb2d.gravityScale = 25;
         
          quieto();
          var position = new Vector2(transform.position.x+2.5f,transform.position.y-0.3f);
          if(Input.GetKeyUp(KeyCode.X)){
-             
+             dispara();
             Instantiate(rightBullet,position,rightBullet.transform.rotation);
          }
          if(Input.GetKeyUp(KeyCode.M)){
-             
+             dispara();
             Instantiate(rightBulletMedi,position,rightBullet.transform.rotation);
          }
-         if(Input.GetKeyUp(KeyCode.G)){
-             
-            Instantiate(rightBulletGrande,position,rightBullet.transform.rotation);
-         }
          
-         if(Input.GetKey(KeyCode.S)){
-             carga();
-         }
         if(Input.GetKey(KeyCode.Space))
             {  
                 saltar();          
@@ -66,9 +66,11 @@ public class packController : MonoBehaviour
                     
                     Instantiate(rightBulletMedi,position,rightBullet.transform.rotation);
                 }
-                if(Input.GetKeyUp(KeyCode.G)){
-                    
-                    Instantiate(rightBulletGrande,position,rightBullet.transform.rotation);
+                if(Input.GetKey(KeyCode.Space))
+                { 
+                saltar();           
+                saltarF();
+                
                 }
         }
         if(Input.GetKey(KeyCode.RightArrow))
@@ -91,11 +93,11 @@ public class packController : MonoBehaviour
                 
                 Instantiate(rightBulletMedi,position,rightBullet.transform.rotation);
             }
-            if(Input.GetKeyUp(KeyCode.G)){
+            if(Input.GetKey(KeyCode.S)){
+                deslizar();
                 
-                Instantiate(rightBulletGrande,position,rightBullet.transform.rotation);
             }
-            
+           
              
         }else if(Input.GetKey(KeyCode.LeftArrow))
         {
@@ -109,9 +111,20 @@ public class packController : MonoBehaviour
              
            
             }
-            
+             if(Input.GetKey(KeyCode.S)){
+                deslizar();
+                
+            }
             
         } 
+         }else{
+             muere();
+         }
+    }
+    void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.layer ==9 ){
+            SceneManager.LoadScene  ("escena2");
+        }
     }
     public void saltarF(){
         var upSpeed = 80f;
@@ -126,18 +139,26 @@ public class packController : MonoBehaviour
     }
     
     public void correrDis(){
-        animator.SetInteger("Estado", 2);        
-    }
-     public void saltar(){
         animator.SetInteger("Estado", 3);        
     }
-    public void carga(){
+     public void saltar(){
+        animator.SetInteger("Estado", 2);        
+    }
+    public void deslizar(){
+        animator.SetInteger("Estado", 5);        
+    }
+    public void dispara(){
         animator.SetInteger("Estado", 4);        
+    }
+    public void muere(){
+        animator.SetInteger("Estado", 6);        
     }
     public void pequenia(){
         p++;        
     }
-    public void mediana(){
-        m++;        
+    public void enemy(){
+        enemigos--;        
     }
+    
+   
 }

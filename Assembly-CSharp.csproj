@@ -36,11 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\exat2_02\Codigo\mediana.cs" />
+     <Compile Include="Assets\exat2_02\Codigo\camara.cs" />
+     <Compile Include="Assets\exat2_02\Codigo\grande.cs" />
      <Compile Include="Assets\exat2_02\Codigo\packController.cs" />
      <Compile Include="Assets\exat2_02\Codigo\pequenia.cs" />
-     <Compile Include="Assets\exat2_02\Codigo\mediana.cs" />
-     <Compile Include="Assets\exat2_02\Codigo\grande.cs" />
-     <Compile Include="Assets\exat2_02\Codigo\camara.cs" />
+     <Compile Include="Assets\escena1\codigo1\EnemigosController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>E:\Brayan\2020.3.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

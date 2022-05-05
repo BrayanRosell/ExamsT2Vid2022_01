@@ -13,7 +13,7 @@ public class pequenia : MonoBehaviour
          rigidbody = GetComponent<Rigidbody2D>();
         playerController = FindObjectOfType<packController>(); //lo busca
         //para eliminar gameobject
-        Destroy(gameObject,4);
+        Destroy(gameObject,2);
     }
 
     // Update is called once per frame
@@ -24,12 +24,14 @@ public class pequenia : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.layer ==6 ){
-            if(playerController.p ==4){
+            if(playerController.p ==1){
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
+                 playerController.enemy();
             }
             Destroy(this.gameObject);
             playerController.pequenia();
+           
         }
     }
 }

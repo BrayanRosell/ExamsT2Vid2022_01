@@ -24,12 +24,11 @@ public class mediana : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.layer ==6 ){
-            if(playerController.m ==1){
+            
                 Destroy(other.gameObject);
                 Destroy(this.gameObject);
-            }
-            Destroy(this.gameObject);
-            playerController.mediana();
+          
+            
         }
     }
 }
